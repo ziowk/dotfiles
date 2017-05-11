@@ -1,0 +1,27 @@
+# Use git's default (reverse chronological) order, never automatically
+# use topo-order for commit graph
+set commit-order = default
+
+# Limit number of commits loaded by default to 1000
+set main-options = -n 1000
+
+# Don't show staged and unstaged changes in the main view
+#set show-changes = no
+
+# Optionally, use the old and faster but less acurate graph renderer
+#set main-view-commit-title-graph = v1
+
+# colors
+# remove ugly dark-blue on black
+color "index " color75 default
+color "diff-tree " color75 default
+color "Merge: " color75 default
+color "parent " color75 default
+color "tree " color75 default
+color date color75 default
+color grep.file color75 default
+color help-group color75 default
+color diff-stat color75 default
+color graph-commit color75 default
+# better cursor
+color cursor white color28 bold

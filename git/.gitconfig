@@ -1,0 +1,31 @@
+[user]
+    name = ziowk
+    email = ziowkftw@gmail.com
+[core]
+    editor = nvim
+    excludesfile = /home/taiga/.gitignore_global
+    deltaBaseCacheLimit = 512M
+[grep]
+    lineNumber = true
+[alias]
+    g = grep -- break --heading --line-number
+    branch-name = !git rev-parse --abbrev-ref HEAD
+
+# logs:
+    files = show --pretty='format:"%C(yellow)%h %Creset%s%n"' --stat
+    date = log -1 --pretty=format:'%C(yellow)%h%n%C(green)%s%nAuthor date:   %C(cyan)%ai%nCommiter date: %C(cyan)%ci'
+    dates = log --pretty=format:'%C(yellow)%h   %C(green)%s %C(red)%an%nAuthor date:   %C(cyan)%ai %C(reset)Commiter date: %C(cyan)%ci%n'
+    l = log --oneline
+    ls = log --pretty="%C(yellow)%h\\ %Cblue[%cd]\\ %Creset%s\\ %Cgreen[%an]" --date=format:'%Y-%m-%d %H:%M'
+    ll = log --pretty="%n%C(cyan)%x2a%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2d%x2a%n%n%Cblue[%cd]\\ %Cgreen[%an]%n%C(yellow)%h\\ %Creset%s" --date=format:'%Y-%m-%d %H:%M' --stat
+
+# repo mutation:
+    pop = !git reset HEAD^ && git stash && git stash drop stash@{0} # reset --hard HEAD^ often checkouts whole repo, which triggers full rebuild
+    yolo = !git push origin HEAD:refs/for/$(git branch-name)
+    yolotizen = !git push origin HEAD:refs/for/tizen
+    update = !git fetch && git merge --ff-only
+[diff]
+    indentHeuristic = true
+    algorithm = histogram
+[commit]
+    verbose = true
