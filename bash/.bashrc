@@ -237,13 +237,5 @@ trap __st_workaround EXIT
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
-
-
-
-
-# Home-related stuff below
-
-# create new session or attach on new terminal
-if [[ -z $TMUX ]]; then
-    tmux new-session -A -s MAIN
-fi
+# Additional configuration per host
+. ~/.bashrc_$(hostname)
