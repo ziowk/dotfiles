@@ -81,7 +81,7 @@ __command_prompt(){
       JOBS+="(j: $JOBS_COUNT)"
   fi
   local PROMPT=$'\[\033[00m\]\[$(randhsv)\]\U0001f394 \[\033[00m\]'
-  PS1=""
+  PS1="\n"
   PS1+="$DATE"
   PS1+=" "
   PS1+="$BRANCH"
