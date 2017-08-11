@@ -126,3 +126,5 @@ inoremap jj <esc>
 inoremap <esc> <Nop>
 nnoremap Y y$
 
+nnoremap <SPACE> <Nop>
+let mapleader="\<Space>"
