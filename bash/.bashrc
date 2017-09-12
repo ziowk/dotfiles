@@ -58,6 +58,14 @@ fi
 
 source ~/.git-prompt.sh
 
+__check_if_in_ssh(){
+  if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+    return 1
+  else
+    return 0
+  fi
+}
+
 __command_prompt(){
   local LAST_STATUS="$?"
   local JOBS_COUNT=$(jobs -s | wc -l)
@@ -73,14 +81,19 @@ __command_prompt(){
       EXIT_STATUS+="$LAST_STATUS"
   fi
   local DEBIAN_CHROOT=$'\[\033[01;00m\]:${debian_chroot:+($debian_chroot)}'
-  local USER_HOST=$'\[\033[01;32m\]\u@\h\[\033[00m\]:'
+  local USER_HOST=''
+  if __check_if_in_ssh; then
+      USER_HOST=$'\[\033[01;32m\]\u@\h\[\033[00m\]:'
+  else
+      USER_HOST=$'\[\033[01;31m\]\u@\h\[\033[00m\]:'
+  fi
   local WORKING_DIR=$'\[\033[01;35m\]\w'
   local JOBS=''
   if [ $JOBS_COUNT -ne 0 ]; then
       JOBS=$'\[\033[01;36m\]'
       JOBS+="(j: $JOBS_COUNT)"
   fi
-  local PROMPT=$'\[\033[00m\]\[$(randhsv)\]\U0001f394 \[\033[00m\]'
+  local PROMPT=$'\[\033[00m\]\[$(randhsv)\]\u2764 \[\033[00m\]'
   PS1="\n"
   PS1+="$DATE"
   PS1+=" "
