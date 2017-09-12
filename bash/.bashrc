@@ -248,4 +248,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # Additional configuration per host
-. ~/.bashrc_$(hostname)
+if [ -e ~/.bashrc_$(hostname) ]; then
+  . ~/.bashrc_$(hostname)
+fi
