@@ -3,7 +3,7 @@
     email = ziowkftw@gmail.com
 [core]
     editor = nvim
-    excludesfile = /home/taiga/.gitignore_global
+    excludesfile = ~/.gitignore_global
     deltaBaseCacheLimit = 512M
 [grep]
     lineNumber = true
