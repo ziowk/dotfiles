@@ -213,6 +213,9 @@ export IGNOREEOF=50
 alias vim=nvim
 alias vv=nvim
 
+# allow 'watch' to recognize aliases
+alias watch='watch '
+
 # workaround for tig highlight line problem (linked with $TERM and ncurses)
 alias aptitude='sudo TERM=screen-256color aptitude'
 alias htop='sudo TERM=screen-256color htop'
