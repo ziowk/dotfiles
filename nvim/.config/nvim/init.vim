@@ -48,6 +48,9 @@ Plug 'ntpeters/vim-better-whitespace'
 " switching between header and code
 Plug 'derekwyatt/vim-fswitch'
 
+" vim focus events in tmux
+Plug 'tmux-plugins/vim-tmux-focus-events'
+
 "unused:
 "Plugin 'Lokaltog/powerline.git',{'rtp':'powerline/bindings/vim'}
 "Plugin 'jeffkreeftmeijer/vim-numbertoggle.git'
@@ -122,6 +125,9 @@ set spell
 set spelllang=en
 
 set colorcolumn=80
+
+au FocusGained,BufEnter * checktime
+" au CursorHold,CursorHoldI * checktime
 
 set directory=.,$TEMP
 
