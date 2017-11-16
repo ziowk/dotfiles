@@ -118,6 +118,9 @@ set ssop-=options
 set foldmethod=indent
 set foldlevel=99
 
+set spell
+set spelllang=en
+
 set colorcolumn=80
 
 set directory=.,$TEMP
