@@ -1,0 +1,4 @@
+PATH=/usr/local/go/bin:"$PATH"
+PATH=/ssd/Documents/depot_tools:"$PATH"
+CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome-devel-sandbox
+if [ -e /home/g.ludwikowsk/.nix-profile/etc/profile.d/nix.sh ]; then . /home/g.ludwikowsk/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
