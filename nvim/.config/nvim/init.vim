@@ -51,6 +51,9 @@ Plug 'derekwyatt/vim-fswitch'
 " vim focus events in tmux
 Plug 'tmux-plugins/vim-tmux-focus-events'
 
+" show changes sign columns
+Plug 'airblade/vim-gitgutter'
+
 "unused:
 "Plugin 'Lokaltog/powerline.git',{'rtp':'powerline/bindings/vim'}
 "Plugin 'jeffkreeftmeijer/vim-numbertoggle.git'
