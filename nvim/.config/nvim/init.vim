@@ -54,6 +54,10 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 " show changes sign columns
 Plug 'airblade/vim-gitgutter'
 
+" airline statusbar replacement
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
 "unused:
 "Plugin 'Lokaltog/powerline.git',{'rtp':'powerline/bindings/vim'}
 "Plugin 'jeffkreeftmeijer/vim-numbertoggle.git'
@@ -63,6 +67,20 @@ call plug#end()
 " Enable persistent undo so that undo history persists across vim sessions
 set undofile
 set undodir=~/.vim/undo
+
+" To use airline:
+" 1. install https://github.com/powerline/fonts (correct Literation ->
+" Liberation everywhere!)
+" 2. rebuild st to use 'Liberation Mono for Powerline'
+" 3. (maybe) rebuild font cache - fc-cache -vf ~/.fonts ~/.local/share/fonts
+" 4. restart st and vim
+
+" air-line
+let g:airline_theme='deus'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+
+set noshowmode
 
 nnoremap <F5> :MundoToggle<CR>
 nnoremap <F6> :FSHere<CR>
