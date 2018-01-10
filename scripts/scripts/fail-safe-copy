@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+tee /tmp/COPYLOG2 | /usr/bin/xsel -i --clipboard
+sleep 0.5
+/usr/bin/xsel -i --clipboard </tmp/COPYLOG2
+sleep 0.5
+/usr/bin/xsel -i --clipboard </tmp/COPYLOG2
+sleep 0.5
+/usr/bin/xsel -i --clipboard </tmp/COPYLOG2
+sleep 0.5
+/usr/bin/xsel -i --clipboard </tmp/COPYLOG2
