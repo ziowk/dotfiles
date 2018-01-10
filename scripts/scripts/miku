@@ -1,0 +1,83 @@
+#!/usr/bin/env python
+
+import datetime
+import sys
+import subprocess
+from twilio.rest import TwilioRestClient 
+
+SUCCESS_CODE = 0
+LINE_LENGTH = 72
+LINE_CHAR = '='
+SUMMARY_STR_SUCCESS = "\"{}\" finished"
+SUMMARY_STR_FAIL = "\"{}\" failed"
+BODY_SUCCESS = "start: {} \ntime: {}"
+BODY_FAIL = "code: {} \nstart: {} \ntime: {}"
+BODY_FAIL_WITH_STR = "code: {} \nmsg: {} \nstart: {} \ntime: {}"
+UBUNTU_ICON_SUCCESS = 'emblem-default'
+UBUNTU_ICON_FAIL = 'software-update-urgent'
+COMMAND_DISP_LENGTH = 40
+ACCOUNT_SID = "INSERT HERE" 
+AUTH_TOKEN = "INSERT HERE" 
+TIME_WO_MS_FMT = "%Y-%m-%d %H:%M:%S"
+
+def notify_tty(result, summary, body):
+    print
+    print LINE_LENGTH * LINE_CHAR
+    print summary
+    print
+    print body
+    print LINE_LENGTH * LINE_CHAR
+    print
+
+def notify_ubuntu(result, summary, body):
+    icon = UBUNTU_ICON_SUCCESS if result else UBUNTU_ICON_FAIL
+
+    ubuntu_notify_cmd = ['notify-send', '-i', icon, summary, body]
+    subprocess.check_call(ubuntu_notify_cmd)
+
+def notify_sms(result, summary, body_text):
+    client = TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN) 
+    message = client.messages.create(
+        to = "INSERT HERE", 
+        from_ = "INSERT HERE", 
+        body = ":\n" + summary + "\n\n" + body_text,  
+    )
+
+def get_msg_summary_body(result, command, start_time, code = None, error_str = None):
+    execution_time = datetime.datetime.now() - start_time
+    start_time_str = start_time.strftime(TIME_WO_MS_FMT)
+    if len(command) > COMMAND_DISP_LENGTH:
+        command = command[:COMMAND_DISP_LENGTH] + '...'
+    summary = SUMMARY_STR_SUCCESS.format(command) if result else SUMMARY_STR_FAIL.format(command)
+    if result:
+        body = BODY_SUCCESS.format(start_time_str,execution_time)
+    elif error_str:
+        body = BODY_FAIL_WITH_STR.format(code,error_str,start_time_str,execution_time)
+    else:
+        body = BODY_FAIL.format(code,start_time_str,execution_time)
+    return (summary, body)
+
+notifiers = [
+    notify_tty,
+    notify_ubuntu,
+    notify_sms,
+    ]
+
+def notify_all(result, command, start_time, code = None, error_str = None):
+    summary, body = get_msg_summary_body(result, command, start_time, code, error_str)
+    for n in notifiers:
+        n(result, summary, body)
+
+if __name__ == "__main__":
+    command_pretty = " ".join(sys.argv[1:])
+    try:
+        start_time = datetime.datetime.now()
+        subprocess.check_call(sys.argv[1:])
+        notify_all(True, command_pretty, start_time, SUCCESS_CODE)
+    except OSError as e:
+        notify_all(False, command_pretty, start_time, e.errno, e.strerror)
+    except subprocess.CalledProcessError as e:
+        notify_all(False, command_pretty, start_time, e.returncode)
+    
+# dodac czas rozpoczecia do body?
+# obslugiwac ctr-c / sigint? (except KeyboardInterrupt). Czy ctrl-c to to samo co sigint w przypadku przerwania pracy z klawiatury? Jak to sie ma do procesu dziecka?

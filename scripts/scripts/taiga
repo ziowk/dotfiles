@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+#set -x
+
+# --start=58 https://www.youtube.com/watch?v=YY1vo1X0HyQ
+# https://www.youtube.com/watch?v=ZpPB4bp4whU
+
+(while true; do
+  #echo mpv --fs --fs-screen=all --loop-playlist --start=${2:-0} "$1"
+  mpv --really-quiet --fs --fs-screen=all --loop-playlist --audio=no --start=${2:-0} "$1"
+  #mpv --really-quiet --loop-playlist --start=${2:-0} "$1"
+  exit_status=$?
+  #echo EXIT_STATUS: $exit_status
+  if [ $exit_status -eq 0 ]; then
+    break
+  fi
+  if [ $exit_status -eq 4 ]; then
+    break
+  fi
+  if [ $exit_status -eq 130 ]; then
+    break
+  fi
+done
+) &
+
+xtrlock-pam -b none
+export BASH_PID=$(pgrep -P $$)
+MPV_PID=$(pgrep -P $BASH_PID)
+kill -2 $MPV_PID
