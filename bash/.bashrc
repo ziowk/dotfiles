@@ -209,6 +209,9 @@ export IGNOREEOF=50
 # added by fzf for fuzzy search
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
+# fzf should also search through hidden files
+export FZF_DEFAULT_COMMAND='rg -l -g "!.git/" --hidden ""'
+
 # always use neovim
 alias vim=nvim
 alias vv=nvim
