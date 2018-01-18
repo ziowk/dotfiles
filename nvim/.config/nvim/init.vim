@@ -146,6 +146,8 @@ set spell
 set spelllang=en
 
 set colorcolumn=80
+set cursorline
+set cursorcolumn
 
 au FocusGained,BufEnter * checktime
 " au CursorHold,CursorHoldI * checktime
