@@ -58,6 +58,9 @@ Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+" show indent lines
+Plug 'Yggdroot/indentLine'
+
 "unused:
 "Plugin 'Lokaltog/powerline.git',{'rtp':'powerline/bindings/vim'}
 "Plugin 'jeffkreeftmeijer/vim-numbertoggle.git'
