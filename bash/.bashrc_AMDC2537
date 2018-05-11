@@ -8,3 +8,6 @@ fi
 
 export PATH=$PATH:/usr/local/go/bin
 export GOPATH=/ssd/Documents/go-workspace
+export PATH="/home/g.ludwikowsk/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
