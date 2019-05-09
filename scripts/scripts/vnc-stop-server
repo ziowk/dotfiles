@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+vncserver -kill :1
+
+# todo: find a clean way to stop websockify
+pkill websockify

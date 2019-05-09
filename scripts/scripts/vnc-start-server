@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+WIDTH=${1:-1440}
+HEIGHT=${2:-900}
+
+vncserver :1 -geometry "$WIDTH"x"$HEIGHT"
+websockify -D --web=/usr/share/novnc 6999 localhost:5901
